@@ -4,7 +4,6 @@ import pytest
 
 from headerhawk.scanner import analyze_cookies, analyze_headers, calculate_score, normalize_url, TLSInfo
 
-
 def test_normalize_url_adds_https_and_path() -> None:
     assert normalize_url("example.com") == "https://example.com/"
 
