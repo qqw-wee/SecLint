@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "headerhawk"
+name = "seclint"
 version = "0.1.0"
 description = "A tiny defensive CLI for checking TLS details and HTTP security headers."
 readme = "README.md"
