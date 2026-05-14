@@ -1,12 +1,12 @@
 # HeaderHawk
 
-🛡️ 一个轻量级、防御向的网络安全命令行小工具，用来检查网站的 HTTPS/TLS 配置、常见 HTTP 安全响应头和 Cookie 安全标记。
+一个轻量级、防御向的网络安全命令行小工具，用来检查网站的 HTTPS/TLS 配置、常见 HTTP 安全响应头和 Cookie 安全标记。
 
 HeaderHawk 的目标很简单：输入一个 URL，它会返回 TLS 证书信息、缺失的安全响应头、Cookie 配置风险，以及一个简洁的加固评分。项目只依赖 Python 标准库，适合快速安全巡检、CI 冒烟检查、上线前配置复核或安全文档演示。
 
-## ✨ 功能特性
+## 功能特性
 
-- 🔐 检查常见 HTTP 安全响应头：
+- 检查常见 HTTP 安全响应头：
   - `Strict-Transport-Security`
   - `Content-Security-Policy`
   - `X-Content-Type-Options`
@@ -14,13 +14,13 @@ HeaderHawk 的目标很简单：输入一个 URL，它会返回 TLS 证书信息
   - `Referrer-Policy`
   - `Permissions-Policy`
   - `Cross-Origin-Opener-Policy`
-- 📜 读取 TLS 证书的主题、签发者、过期时间和 DNS 名称。
-- ⏰ 提示已经过期或即将过期的证书。
-- 🍪 检查 `Set-Cookie` 中的 `Secure`、`HttpOnly`、`SameSite` 标记。
-- 📊 输出一个简单的安全加固评分。
-- 🧾 支持终端可读报告和 JSON 输出。
+- 读取 TLS 证书的主题、签发者、过期时间和 DNS 名称。
+- 提示已经过期或即将过期的证书。
+- 检查 `Set-Cookie` 中的 `Secure`、`HttpOnly`、`SameSite` 标记。
+- 输出一个简单的安全加固评分。
+- 支持终端可读报告和 JSON 输出。
 
-## 🚀 安装与运行
+## 安装与运行
 
 直接在项目目录中运行：
 
@@ -37,7 +37,7 @@ python3 -m pip install -e .
 headerhawk https://example.com
 ```
 
-## 🧪 使用示例
+## 使用示例
 
 基础扫描：
 
@@ -63,7 +63,7 @@ headerhawk https://example.com --timeout 10
 headerhawk https://example.com https://www.python.org --json
 ```
 
-## 📌 示例输出
+## 示例输出
 
 ```text
 https://example.com
@@ -84,29 +84,29 @@ Headers
     Set DENY or SAMEORIGIN, or use CSP frame-ancestors.
 ```
 
-## 🧭 评分说明
+## 评分说明
 
 HeaderHawk 会从 100 分开始扣分：
 
-- 🧱 缺少常见安全响应头会扣分。
-- 🔓 目标没有使用 HTTPS 会扣分。
-- ⚠️ TLS 证书异常、过期或即将过期会扣分。
-- 🍪 Cookie 缺少推荐安全标记会扣分。
+- 缺少常见安全响应头会扣分。
+- 目标没有使用 HTTPS 会扣分。
+- TLS 证书异常、过期或即将过期会扣分。
+- Cookie 缺少推荐安全标记会扣分。
 
 这个分数不是严格的合规结论，而是一个快速排查线索。真实生产环境还需要结合业务场景、反向代理配置、认证逻辑和浏览器兼容性一起评估。
 
-## 🛡️ 防御黑客攻击
+## 防御黑客攻击
 
 HeaderHawk 不能替代完整的渗透测试或 WAF，但它可以帮助你发现一些常见的 Web 安全配置缺口。这些缺口经常被攻击者用来扩大 XSS、点击劫持、会话窃取、降级访问和跨站数据泄露等风险。
 
 建议把它用于以下防御场景：
 
-- 🧪 上线前检查：在新服务发布前扫描一次，确认基础安全响应头没有遗漏。
-- 🔁 CI/CD 安全门禁：把 `headerhawk --json` 接入流水线，对缺失关键响应头的服务发出告警。
-- 🌐 反向代理复核：检查 Nginx、Caddy、Traefik、CDN 或 API Gateway 是否正确注入安全头。
-- 🔐 TLS 证书巡检：提前发现证书即将过期、证书链异常或站点没有启用 HTTPS。
-- 🍪 会话 Cookie 加固：确认登录态 Cookie 使用了 `Secure`、`HttpOnly` 和 `SameSite`。
-- 📋 安全基线审计：定期扫描公开域名，生成 JSON 结果用于对比历史配置变化。
+- 上线前检查：在新服务发布前扫描一次，确认基础安全响应头没有遗漏。
+- CI/CD 安全门禁：把 `headerhawk --json` 接入流水线，对缺失关键响应头的服务发出告警。
+- 反向代理复核：检查 Nginx、Caddy、Traefik、CDN 或 API Gateway 是否正确注入安全头。
+- TLS 证书巡检：提前发现证书即将过期、证书链异常或站点没有启用 HTTPS。
+- 会话 Cookie 加固：确认登录态 Cookie 使用了 `Secure`、`HttpOnly` 和 `SameSite`。
+- 安全基线审计：定期扫描公开域名，生成 JSON 结果用于对比历史配置变化。
 
 常见加固方向：
 
@@ -147,28 +147,28 @@ add_header Permissions-Policy "camera=(), microphone=(), geolocation=()" always;
 add_header Content-Security-Policy-Report-Only "default-src 'self'; object-src 'none'; frame-ancestors 'self'" always;
 ```
 
-## 🧯 安全边界
+## 安全边界
 
 HeaderHawk 只做被动检查：
 
-- ✅ 读取公开 HTTP 响应头
-- ✅ 读取公开 TLS 证书信息
-- ✅ 分析响应中的 Cookie 标记
-- ❌ 不爆破
-- ❌ 不利用漏洞
-- ❌ 不 fuzz
-- ❌ 不爬取站点
-- ❌ 不尝试绕过认证
+- 读取公开 HTTP 响应头
+- 读取公开 TLS 证书信息
+- 分析响应中的 Cookie 标记
+- 不爆破
+- 不利用漏洞
+- 不 fuzz
+- 不爬取站点
+- 不尝试绕过认证
 
 请只扫描你拥有或明确获得授权的系统。
 
-## 🔢 退出码
+## 退出码
 
 - `0`：所有扫描完成
 - `1`：一个或多个目标扫描失败
 - `2`：命令行参数错误
 
-## 🛠️ 开发
+## 开发
 
 运行测试：
 
