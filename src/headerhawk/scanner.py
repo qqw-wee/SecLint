@@ -10,7 +10,6 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import urlparse, urlunparse
 from urllib.request import Request, urlopen
 
-
 SECURITY_HEADERS: tuple[str, ...] = (
     "Strict-Transport-Security",
     "Content-Security-Policy",
